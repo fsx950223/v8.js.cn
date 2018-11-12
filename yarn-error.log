@@ -1,0 +1,70 @@
+Arguments: 
+  /media/fangsixie/data/node-v11.1.0-linux-x64/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /home/fangsixie/anaconda3/bin:/media/fangsixie/data/jdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/cuda-10.0/bin
+
+Yarn version: 
+  1.12.1
+
+Node version: 
+  11.1.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.npmjs.org/@11ty%2feleventy: tunneling socket could not be established, cause=connect ECONNREFUSED 127.0.0.1:36803
+      at ClientRequest.onError (/media/fangsixie/data/node-v11.1.0-linux-x64/lib/node_modules/yarn/lib/cli.js:136834:17)
+      at Object.onceWrapper (events.js:273:13)
+      at ClientRequest.emit (events.js:182:13)
+      at Socket.socketErrorListener (_http_client.js:399:9)
+      at Socket.emit (events.js:182:13)
+      at emitErrorNT (internal/streams/destroy.js:82:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:50:3)
+      at process.internalTickCallback (internal/process/next_tick.js:72:19)
+
+npm manifest: 
+  {
+    "private": true,
+    "scripts": {
+      "lint": "markdownlint src/**/*.md",
+      "eleventy": "eleventy",
+      "html": "html-minifier --config-file=.html-minifier.json --input-dir=dist --output-dir=dist --file-ext=html",
+      "css": "postcss src/_css/main.css --output dist/_css/main.css",
+      "js": "mkdir -p dist/_js && minify --mangle.topLevel src/_js/main.mjs --outFile dist/_js/main.mjs && minify --mangle.topLevel src/_js/legacy.js --outFile dist/_js/legacy.js",
+      "sw": "workbox injectManifest workbox-config.js && minify dist/sw.js --outFile dist/sw.js",
+      "clean": "rm -rf -- dist",
+      "build": "npm run clean && npm run css && npm run js && npm run eleventy && npm run sw && npm run html",
+      "watch": "npm run build && npx eleventy --watch",
+      "debug": "DEBUG=* npx eleventy",
+      "start": "superstatic dist --port=9001",
+      "ci": "npm run lint && npm run build"
+    },
+    "devDependencies": {
+      "@11ty/eleventy": "^0.5.4",
+      "@11ty/eleventy-plugin-rss": "^1.0.3",
+      "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.0",
+      "autoprefixer": "^9.3.1",
+      "babel-minify": "^0.5.0",
+      "cssnano": "^4.1.7",
+      "he": "^1.2.0",
+      "html-minifier": "^3.5.21",
+      "luxon": "^1.4.4",
+      "markdown-it": "^8.4.2",
+      "markdown-it-anchor": "^5.0.2",
+      "markdown-it-attrs": "^2.3.2",
+      "markdown-it-footnote": "^3.0.1",
+      "markdownlint-cli": "^0.13.0",
+      "postcss-cli": "^6.0.1",
+      "postcss-custom-properties": "^8.0.8",
+      "superstatic": "^6.0.3",
+      "workbox-cli": "^4.0.0-alpha.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
